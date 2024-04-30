@@ -72,16 +72,18 @@ public class Maraton {
         }
     }
 
-   public void iniciarMaraton() {
+   public boolean iniciarMaraton() {
     if (maratonAbierto) {
         JOptionPane.showMessageDialog(null, "El maratón ya está iniciado.");
     } else if (participantesRegistrados() == 0) {
         JOptionPane.showMessageDialog(null, "No hay participantes registrados. Registre participantes antes de iniciar el maratón.");
+
     } else {
         maratonAbierto = true;
         horaInicio = obtenerHoraActual();
          JOptionPane.showMessageDialog(null, "Maratón iniciado con " + participantesRegistrados() + " participantes. A la hora: " + horaInicio);
     }
+    return maratonAbierto;
 }
 
 

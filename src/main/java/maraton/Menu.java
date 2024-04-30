@@ -15,7 +15,7 @@ public class Menu {
         int opcion = -1;
         do {
             opcion = this.menuMaraton();
-        } while (opcion != 0 && !this.gm.getMaraton().isMaratonAbierto());
+        } while (opcion != 4 && !this.gm.getMaraton().isMaratonAbierto());
         opcion = -1;
         this.menuCompeticion();
     }
@@ -149,7 +149,7 @@ public class Menu {
                 gm.listarParticipantes();
                 break;
             case 4:
-                this.gm.getMaraton().iniciarMaraton();
+                if (!this.gm.getMaraton().iniciarMaraton()){ opcion =-1;}
                 break;
             case 5:
                 JOptionPane.showMessageDialog(null, "Saliendo del programa. ¡Hasta luego!");
