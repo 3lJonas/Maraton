@@ -63,14 +63,14 @@ public class Menu {
         int opcion;
         do {
             String[] opciones = {
-                    "Listado de participantes por auspiciante",
-                    "Listado de participantes por categoría en orden de llegada",
-                    "Listado de inscritos que no participaron",
-                    "Listado de quienes no completaron la carrera",
-                    "Listado de inscritos",
+                    "Por auspiciante",
+                    "Por categoría en orden de llegada",
+                    "Inscritos que no participaron",
+                    "Quienes no completaron la carrera",
+                    "Inscritos",
                     "Regresar"
             };
-            opcion = JOptionPane.showOptionDialog(null, "=== Menú de Reportes ===", "Reportes", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+            opcion = JOptionPane.showOptionDialog(null, "=== Menú de Reportes ===", "Listado de participantes", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
 
             switch (opcion) {
                 case 0:
@@ -111,7 +111,7 @@ public class Menu {
         };
 
         opcion = JOptionPane.showOptionDialog(null, "                                                                                                                   == Menú Maratón ===", "Maratón", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-        System.out.println(opcion);
+
         switch (opcion) {
             case 0:
                 Participante p = gm.crearParticipante();
