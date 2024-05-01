@@ -4,10 +4,10 @@ import javax.swing.JOptionPane;
 
 public class Menu {
 
-    Gestormaraton gm;
+    GestorMaraton gm;
 
     public Menu() {
-        this.gm = new Gestormaraton();
+        this.gm = new GestorMaraton();
     }
 
     public void ejecutarMenu() {
