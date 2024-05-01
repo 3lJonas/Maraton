@@ -2,13 +2,11 @@ package maraton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class GestorMaraton {
 
     GestorValidacionDatos validar = new GestorValidacionDatos();
-   
     private Maraton maraton;
 
     public GestorMaraton() {
@@ -55,11 +53,26 @@ public class GestorMaraton {
         } catch (Exception e) {
             return null;
         }
-
-        p.setSexo(JOptionPane.showInputDialog(null, "Ingrese el sexo: "));
-        if (p.getSexo() == null) {
-            return null;
+        int opcion = -1;
+        String[] sexoaVarios = {"Hombre", "Mujer", "Otros.."};
+        opcion = JOptionPane.showOptionDialog(null, "                            Genero", "Selección de genero", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, sexoaVarios, sexoaVarios[0]);
+        switch (opcion) {
+            case 0:
+                p.setSexo("Hombre");
+                break;
+            case 1:
+                p.setSexo("Mujer");
+                break;
+            case 2:
+                p.setSexo(JOptionPane.showInputDialog(null, "Ingrese el sexo: "));
+                if (p.getSexo() == null) {
+                    return null;
+                }
+                break;
+            default:
+                return null;
         }
+
         int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar patrocinadores? ");
 
         while (respuesta == 0) {
