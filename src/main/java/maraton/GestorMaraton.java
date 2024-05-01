@@ -89,7 +89,7 @@ public class GestorMaraton {
             }
             p.agregarPatrocinador(patrocinador);
 
-            respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro patrocinador? (S/N): ");
+            respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro patrocinador?");
 
         }
 
