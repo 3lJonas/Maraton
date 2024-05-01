@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-public class Gestormaraton {
+public class GestorMaraton {
     GestorValidacionDatos validar = new GestorValidacionDatos();
     Scanner scanner = new Scanner(System.in);
     private Maraton maraton;
 
-    public Gestormaraton() {
+    public GestorMaraton() {
         this.maraton = new Maraton();
     }
 
