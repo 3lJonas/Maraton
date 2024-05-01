@@ -9,7 +9,7 @@ public class GestorValidacionDatos {
 
     public boolean validarCedula(String cedula) {
         // Verificar que la cédula tenga 10 dígitos
-        if (cedula.length() != 10) {
+        if (cedula.length() != 10 ) {
             JOptionPane.showMessageDialog(null, "La cédula debe tener 10 dígitos.");
             return false;
         }

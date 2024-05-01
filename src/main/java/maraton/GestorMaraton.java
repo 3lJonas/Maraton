@@ -6,6 +6,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class GestorMaraton {
+
     GestorValidacionDatos validar = new GestorValidacionDatos();
     Scanner scanner = new Scanner(System.in);
     private Maraton maraton;
@@ -19,7 +20,7 @@ public class GestorMaraton {
         return this.maraton.eliminarParticipante(p);
     }
 
-    public Participante crearParticipante () {
+    public Participante crearParticipante() {
 
         //Creamos un participante
         Participante p = new Participante();
@@ -27,7 +28,10 @@ public class GestorMaraton {
         //Validamos la cedula del participante
         do {
             p.setNumeroCedula(JOptionPane.showInputDialog(null, "Ingrese el número de cédula: "));
-        }while (!validar.validarCedula(p.getNumeroCedula()));
+            if (p.getNumeroCedula() == null) {
+                return null;
+            }
+        } while (!validar.validarCedula(p.getNumeroCedula()));
 
         //Buscamos que la cedula no se repita
         if (buscarParticipantePorCedula(p.getNumeroCedula()) != null) {
@@ -35,11 +39,14 @@ public class GestorMaraton {
             return null;
         }
 
-
         p.setNombre(JOptionPane.showInputDialog(null, "Ingrese el nombre: "));
-
+        if (p.getNombre() == null) {
+            return null;
+        }
         p.setApellido(JOptionPane.showInputDialog(null, "Ingrese el apellido: "));
-
+        if (p.getApellido() == null) {
+            return null;
+        }
         p.setEdad(0);
         try {
 
@@ -50,22 +57,27 @@ public class GestorMaraton {
         }
 
         p.setSexo(JOptionPane.showInputDialog(null, "Ingrese el sexo: "));
+        if (p.getSexo() == null) {
+            return null;
+        }
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar patrocinadores? ");
 
-        String respuesta = JOptionPane.showInputDialog(null, "¿Desea agregar patrocinadores? (S/N): ");
-
-        while (respuesta.equalsIgnoreCase("S")) {
+        while (respuesta == 0) {
 
             Patrocinador patrocinador = new Patrocinador();
 
             patrocinador.setNombre(JOptionPane.showInputDialog(null, "Ingrese el nombre del patrocinador: "));
-
+            if (patrocinador.getNombre() == null) {
+                return null;
+            }
             patrocinador.setTipo(JOptionPane.showInputDialog(null, "Ingrese el tipo de patrocinador: "));
-
-
+            if (patrocinador.getTipo() == null) {
+                return null;
+            }
             p.agregarPatrocinador(patrocinador);
 
+            respuesta = JOptionPane.showConfirmDialog(null, "¿Desea agregar otro patrocinador? (S/N): ");
 
-            respuesta = JOptionPane.showInputDialog(null, "¿Desea agregar otro patrocinador? (S/N): ");
         }
 
         return p;
@@ -75,6 +87,9 @@ public class GestorMaraton {
         if (this.maraton.isMaratonAbierto()) {
 
             String cedula = JOptionPane.showInputDialog(null, "Cedula de Participante a modificar:");
+            if (cedula == null) {
+                return false;
+            }
             Participante p = this.buscarParticipantePorCedula(cedula);
             if (p != null && !p.isAusencia()) {
                 p.setHoraLlegada(this.maraton.obtenerHoraActual());
@@ -91,6 +106,9 @@ public class GestorMaraton {
     public boolean registrarausencia() {
 
         String cedula = JOptionPane.showInputDialog(null, "Cedula del participante: ");
+        if (cedula == null) {
+            return false;
+        }
         Participante p = this.buscarParticipantePorCedula(cedula);
         if (p != null) {
             p.setAusencia(true);
@@ -184,7 +202,7 @@ public class GestorMaraton {
                         }
                     }
                 }
-                 mensaje = mensaje + "----------------------------------\n";
+                mensaje = mensaje + "----------------------------------\n";
             }
             JOptionPane.showMessageDialog(null, mensaje, "Listado de participantes por patrocinador", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -192,22 +210,22 @@ public class GestorMaraton {
         }
     }
 
-public void listadoporcategoriallegada() {
-    String mensaje = "Reportes de la maraton:\n";
+    public void listadoporcategoriallegada() {
+        String mensaje = "Reportes de la maraton:\n";
 
-    for (int i = 1; i <= 3; i++) {
-        ArrayList<Participante> participantesCategoria = obtenerParticipantesCategoria(i);
-        Collections.sort(participantesCategoria);
-        mensaje=mensaje+"Categoria "+i+"\n";
-        for (Participante participante : participantesCategoria) {
-            if (participante.getHoraLlegada() != null) {
-                mensaje=mensaje+" - "+participante.getNombre()+" "+participante.getApellido()+                    
-                        " "+participante.getHoraLlegada()+"\n";
+        for (int i = 1; i <= 3; i++) {
+            ArrayList<Participante> participantesCategoria = obtenerParticipantesCategoria(i);
+            Collections.sort(participantesCategoria);
+            mensaje = mensaje + "Categoria " + i + "\n";
+            for (Participante participante : participantesCategoria) {
+                if (participante.getHoraLlegada() != null) {
+                    mensaje = mensaje + " - " + participante.getNombre() + " " + participante.getApellido()
+                            + " " + participante.getHoraLlegada() + "\n";
+                }
             }
         }
+        JOptionPane.showMessageDialog(null, mensaje, "Reportes de la maratón", JOptionPane.INFORMATION_MESSAGE);
     }
-    JOptionPane.showMessageDialog(null, mensaje, "Reportes de la maratón", JOptionPane.INFORMATION_MESSAGE);
-}
 
     public ArrayList<Participante> obtenerinscritos() {
         ArrayList<Participante> arraysParticipantes = new ArrayList<>();
@@ -220,22 +238,22 @@ public void listadoporcategoriallegada() {
     }
 
     public void listadoinscritosnoparticipar() {
-       String mensaje="-----inscritos pero no participaron----\n";
+        String mensaje = "-----inscritos pero no participaron----\n";
         ArrayList<Participante> participantesCategoria = obtenerParticipantes();
         for (Participante participante : participantesCategoria) {
             if (participante.isAusencia()) {
-                mensaje=mensaje+" - " + participante.getNombre() + " " + participante.getApellido()+"\n";
+                mensaje = mensaje + " - " + participante.getNombre() + " " + participante.getApellido() + "\n";
             }
         }
         JOptionPane.showMessageDialog(null, mensaje);
     }
 
     public void listadoinscritosnoterminar() {
-       String mensaje="-----inscritos que no terminaron----\n";
+        String mensaje = "-----inscritos que no terminaron----\n";
         ArrayList<Participante> participantesCategoria = obtenerParticipantes();
         for (Participante participante : participantesCategoria) {
             if (!participante.isAusencia() && participante.getHoraLlegada() == null) {
-               mensaje=mensaje+" - " + participante.getNombre() + " " + participante.getApellido()+"\n";
+                mensaje = mensaje + " - " + participante.getNombre() + " " + participante.getApellido() + "\n";
             }
         }
         JOptionPane.showMessageDialog(null, mensaje);
