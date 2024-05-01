@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class GestorMaraton {
 
     GestorValidacionDatos validar = new GestorValidacionDatos();
-    Scanner scanner = new Scanner(System.in);
+   
     private Maraton maraton;
 
     public GestorMaraton() {
