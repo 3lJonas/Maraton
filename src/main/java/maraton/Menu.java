@@ -1,6 +1,5 @@
 package maraton;
 
-import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Menu {
@@ -24,15 +23,15 @@ public class Menu {
         int opcion = -1;
         do {
             String[] opciones = {
-                "Registrar llegada participante",
-                "Listado de participantes",
-                "Registrar ausencia de participante",
-                "Cerrar Maraton",
-                "Mostrar Reportes",
-                "Salir"
+                    "Registrar llegada participante",
+                    "Listado de participantes",
+                    "Registrar ausencia de participante",
+                    "Cerrar Maraton",
+                    "Mostrar Reportes",
+                    "Salir"
             };
             opcion = JOptionPane.showOptionDialog(null, "=== Menú Competicion ===", "Competicion", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
-           
+
             switch (opcion) {
                 case 0:
                     gm.registrarLlegada();
@@ -52,7 +51,7 @@ public class Menu {
                 case 5:
                     JOptionPane.showMessageDialog(null, "Saliendo del programa. ¡Hasta luego!");
                     System.exit(0);
-                   
+
                 default:
                     JOptionPane.showMessageDialog(null, "Opción no válida. Intente de nuevo.");
                     break;
@@ -64,12 +63,12 @@ public class Menu {
         int opcion;
         do {
             String[] opciones = {
-                "Listado de participantes por auspiciante",
-                "Listado de participantes por categoría en orden de llegada",
-                "Listado de inscritos que no participaron",
-                "Listado de quienes no completaron la carrera",
-                "Listado de inscritos",
-                "Regresar"
+                    "Listado de participantes por auspiciante",
+                    "Listado de participantes por categoría en orden de llegada",
+                    "Listado de inscritos que no participaron",
+                    "Listado de quienes no completaron la carrera",
+                    "Listado de inscritos",
+                    "Regresar"
             };
             opcion = JOptionPane.showOptionDialog(null, "=== Menú de Reportes ===", "Reportes", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
 
@@ -103,16 +102,16 @@ public class Menu {
     public int menuMaraton() {
         int opcion = -1;
         String[] opciones = {
-            "Registrar participante",
-            "Modificar Participante",
-            "Eliminar participante",
-            "Listado de participantes",
-            "Iniciar Maraton",
-            "Salir"
+                "Registrar participante",
+                "Modificar Participante",
+                "Eliminar participante",
+                "Listado de participantes",
+                "Iniciar Maraton",
+                "Salir"
         };
 
         opcion = JOptionPane.showOptionDialog(null, "                                                                                                                   == Menú Maratón ===", "Maratón", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
- System.out.println(opcion);
+        System.out.println(opcion);
         switch (opcion) {
             case 0:
                 Participante p = gm.crearParticipante();
@@ -149,14 +148,16 @@ public class Menu {
                 gm.listarParticipantes();
                 break;
             case 4:
-                if (!this.gm.getMaraton().iniciarMaraton()){ opcion =-1;}
+                if (!this.gm.getMaraton().iniciarMaraton()) {
+                    opcion = -1;
+                }
                 break;
             case 5:
                 JOptionPane.showMessageDialog(null, "Saliendo del programa. ¡Hasta luego!");
                 System.exit(0);
                 break;
             default:
-               System.exit(0);
+                System.exit(0);
                 break;
         }
         return opcion;

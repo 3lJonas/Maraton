@@ -7,7 +7,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class Gestormaraton {
-
+    GestorValidacionDatos validar = new GestorValidacionDatos();
     Scanner scanner = new Scanner(System.in);
     private Maraton maraton;
 
@@ -20,46 +20,56 @@ public class Gestormaraton {
         return this.maraton.eliminarParticipante(p);
     }
 
-    public Participante crearParticipante() {
+    public Participante crearParticipante () {
 
-        String numeroCedula = JOptionPane.showInputDialog(null, "Ingrese el número de cédula: ");
+        //Creamos un participante
+        Participante p = new Participante();
 
-        if (buscarParticipantePorCedula(numeroCedula) != null) {
-            JOptionPane.showMessageDialog(null, "El participante con la cédula " + numeroCedula + " ya está registrado.");
+        //Validamos la cedula del participante
+        do {
+            p.setNumeroCedula(JOptionPane.showInputDialog(null, "Ingrese el número de cédula: "));
+        }while (!validar.validarCedula(p.getNumeroCedula()));
+
+        //Buscamos que la cedula no se repita
+        if (buscarParticipantePorCedula(p.getNumeroCedula()) != null) {
+            JOptionPane.showMessageDialog(null, "El participante con la cédula " + p.getNumeroCedula() + " ya está registrado.");
             return null;
         }
 
-        String nombre = JOptionPane.showInputDialog(null, "Ingrese el nombre: ");
 
-        String apellido = JOptionPane.showInputDialog(null, "Ingrese el apellido: ");
-        int edad = 0;
+        p.setNombre(JOptionPane.showInputDialog(null, "Ingrese el nombre: "));
+
+        p.setApellido(JOptionPane.showInputDialog(null, "Ingrese el apellido: "));
+
+        p.setEdad(0);
         try {
 
-            edad = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la edad: "));
+            p.setEdad(Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese la edad: ")));
 
         } catch (Exception e) {
             return null;
         }
 
-        String sexo = JOptionPane.showInputDialog(null, "Ingrese el sexo: ");
-
-        Participante nuevoParticipante = new Participante(numeroCedula, nombre, apellido, edad, sexo);
+        p.setSexo(JOptionPane.showInputDialog(null, "Ingrese el sexo: "));
 
         String respuesta = JOptionPane.showInputDialog(null, "¿Desea agregar patrocinadores? (S/N): ");
 
         while (respuesta.equalsIgnoreCase("S")) {
 
-            String nombrePatrocinador = JOptionPane.showInputDialog(null, "Ingrese el nombre del patrocinador: ");
+            Patrocinador patrocinador = new Patrocinador();
 
-            String tipoPatrocinador = JOptionPane.showInputDialog(null, "Ingrese el tipo de patrocinador: ");
+            patrocinador.setNombre(JOptionPane.showInputDialog(null, "Ingrese el nombre del patrocinador: "));
 
-            Patrocinador patrocinador = new Patrocinador(nombrePatrocinador, tipoPatrocinador);
-            nuevoParticipante.agregarPatrocinador(patrocinador);
+            patrocinador.setTipo(JOptionPane.showInputDialog(null, "Ingrese el tipo de patrocinador: "));
+
+
+            p.agregarPatrocinador(patrocinador);
+
 
             respuesta = JOptionPane.showInputDialog(null, "¿Desea agregar otro patrocinador? (S/N): ");
         }
 
-        return nuevoParticipante;
+        return p;
     }
 
     public boolean registrarLlegada() {

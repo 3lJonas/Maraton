@@ -5,10 +5,6 @@
  */
 package maraton;
 
-/**
- *
- * @author User
- */
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -37,13 +33,49 @@ public class Participante implements Comparable<Participante> {
 
     }
 
-    public boolean isAusencia() {
-        return this.ausencia;
+
+    public String getNumeroCedula() {
+        return numeroCedula;
     }
 
-    public void setAusencia(boolean ausencia) {
-        this.ausencia = ausencia;
+    public String setNumeroCedula(String numeroCedula) {
+        this.numeroCedula = numeroCedula;
+        return numeroCedula;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+
 
     public LocalTime getHoraLlegada() {
         return horaLlegada;
@@ -53,24 +85,12 @@ public class Participante implements Comparable<Participante> {
         this.horaLlegada = horaLlegada;
     }
 
-    public String getNumeroCedula() {
-        return numeroCedula;
+    public boolean isAusencia() {
+        return ausencia;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public String getSexo() {
-        return sexo;
+    public void setAusencia(boolean ausencia) {
+        this.ausencia = ausencia;
     }
 
     public ArrayList<Patrocinador> getPatrocinadores() {
@@ -78,6 +98,7 @@ public class Participante implements Comparable<Participante> {
     }
 
     public void agregarPatrocinador(Patrocinador patrocinador) {
+        patrocinadores = new ArrayList<>();
         patrocinadores.add(patrocinador);
     }
 
@@ -112,4 +133,7 @@ public class Participante implements Comparable<Participante> {
             return this.horaLlegada.compareTo(otroParticipante.horaLlegada);
         }
     }
+
+
+
 }

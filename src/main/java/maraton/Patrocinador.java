@@ -5,17 +5,18 @@
  */
 package maraton;
 
-/**
- *
- * @author User
- */
-class Patrocinador {
-     private String nombre;
+import java.util.ArrayList;
+
+class Patrocinador{
+    private String nombre;
     private String tipo;
 
     public Patrocinador(String nombre, String tipo) {
         this.nombre = nombre;
         this.tipo = tipo;
+    }
+
+    public Patrocinador() {
     }
 
     public String getNombre() {
